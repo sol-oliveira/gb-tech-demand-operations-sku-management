@@ -10,6 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String @id @default(uuid())
+  githubId  Int    @unique
+  name      String
+  login     String
+  avatarUrl String
+}
+
 model Product {
   id     Int     @id @default(autoincrement())
   name    String
@@ -20,6 +28,74 @@ model Product {
   userCreate String
   userUpdate String?  
 
-   @@map("products")
+  skus       SKU[] // Campo de relação reversa exigencia do Prisma
+  @@map("products")
   
+}
+
+model Packaging {
+  id       Int    @id @default(autoincrement())
+  material String  
+  type     String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+  userCreate String
+  userUpdate String?  
+
+   skus       SKU[] // Campo de relação reversa exigencia do Prisma
+  @@map("packagings")
+
+}
+
+model Volumetry {
+  id       Int    @id @default(autoincrement())
+  value    Float
+  unit     String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+  userCreate String
+  userUpdate String?
+
+  skus       SKU[] // Campo de relação reversa exigencia do Prisma
+  @@map("volumetries")
+
+}
+
+model Composition {
+  id                Int      @id @default(autoincrement())
+  formula           String
+  keyIngredients    String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime? @updatedAt
+  userCreate        String
+  userUpdate        String?
+
+  skus       SKU[] // Campo de relação reversa exigencia do Prisma
+  @@map("compositions")
+
+}
+
+model SKU {
+  id                 String      @id @default(uuid())
+  productId          Int
+  skuCode            String
+  description        String
+  commercialDescription String
+  status             String
+
+  compositionId      Int
+  volumetryId        Int
+  packagingId        Int
+
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime?   @updatedAt
+  userCreate         String
+  userUpdate         String? 
+
+  product           Product     @relation(fields: [productId], references: [id])
+  composition       Composition @relation(fields: [compositionId], references: [id])
+  volumetry         Volumetry   @relation(fields: [volumetryId], references: [id])
+  packaging         Packaging   @relation(fields: [packagingId], references: [id])
+
+  @@map("skus")
 }
