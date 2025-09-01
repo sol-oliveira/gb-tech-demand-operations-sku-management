@@ -17,7 +17,7 @@ app.get('/health', async () => {
   }
 });
 
-app.register(skuRoutes, { skuRepository: new SKURepository() });
+app.register(skuRoutes, { skuRepository: new SKURepository(prisma) });
 
 const start = async () => {
   try {

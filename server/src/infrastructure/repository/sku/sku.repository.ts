@@ -5,11 +5,31 @@ import { VolumetryValueObject } from '../../../domain/value_objects/volumetry.vo
 import { PackagingValueObject } from '../../../domain/value_objects/packaging.vo.js';
 import { SKUStatusEnum } from '../../../domain/enums/sku.enum.js';
 import { ISKURepository } from '../../../domain/repositories/sku.repository.interface.js';
-import { prisma } from '../../database/prisma/lib/prisma.client.js';
+import { PrismaClient } from '@prisma/client';
+import { SKUCreateInput, SKUCreateSchema } from '../../../domain/validation/sku.schema.js';
 
 export class SKURepository implements ISKURepository {
-   async findAll(): Promise<SKUEntity[]> {      
-        const skusData = await prisma.sKU.findMany({
+    private prisma: PrismaClient;
+
+    constructor(prismaClient: PrismaClient) {
+        this.prisma = prismaClient;
+    }
+
+    async create(skuData: SKUCreateInput): Promise<boolean> {       
+
+        const data = SKUCreateSchema.parse(skuData);
+
+        try {
+            await this.prisma.sKU.create({ data });
+            return true;
+        } catch (error) {
+            console.error('Error creating SKU:', error);
+            return false;
+        }
+    }
+ 
+    async findAll(): Promise<SKUEntity[]> {      
+        const skusData = await this.prisma.sKU.findMany({
             orderBy: {
                 createdAt: 'desc',
             },
@@ -21,7 +41,7 @@ export class SKURepository implements ISKURepository {
             },
         });
         
-        return skusData.map(data => {            
+        return skusData.map(data  => {            
             const productEntity = new ProductEntity({
                 id: data.product.id,
                 name: data.product.name, 
@@ -68,5 +88,6 @@ export class SKURepository implements ISKURepository {
             });
         });
     }
+   
 }
 
