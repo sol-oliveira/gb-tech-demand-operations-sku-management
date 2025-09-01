@@ -1,7 +1,7 @@
 import { SKUEntity } from '../../../domain/entities/sku.entity.js';
 import { ISKURepository } from '../../../domain/repositories/sku.repository.interface.js';
 
-export class FindAllSKUsUseCase {
+export class ListSKUsUseCase  {
   private readonly skuRepository: ISKURepository;
 
   constructor(skuRepository: ISKURepository) {    
