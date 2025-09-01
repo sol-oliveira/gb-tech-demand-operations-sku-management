@@ -10,6 +10,7 @@ import {
 } from "../../domain/validation/sku.schema.js";
 import z from "zod";
 import { SKUUpdateUseCase } from "../../application/use-case/sku/update-sku-use-case.js";
+import { SKUGetByIdUseCase } from "../../application/use-case/sku/get-sku-by-id-use-case.js";
 
 export async function skuRoutes(
   app: FastifyInstance,
@@ -71,6 +72,27 @@ export async function skuRoutes(
     } catch (error) {
       request.log.error(error, "Erro ao atualizar SKU");
       return reply.code(500).send({ message: "Erro interno ao atualizar SKU" });
+    }
+  });
+
+  app.get("/skus/:id", async (request, reply) => {
+    try {
+      const skuParamsValidation = SKUIdSchema.safeParse(request.params);
+
+      if (!skuParamsValidation.success) {
+        return reply.status(400).send({
+          message: "Erro de validação nos dados enviados",
+          errors: skuParamsValidation.error,
+        });
+      }
+
+      const { id: skuId } = skuParamsValidation.data;
+      const getByIdUseCase = new SKUGetByIdUseCase(deps.skuRepository);
+      const result = await getByIdUseCase.execute(skuId);
+      return reply.code(result ? 200 : 404).send(result);
+    } catch (error) {
+      request.log.error(error, "Erro ao buscar SKUs");
+      return reply.code(500).send({ message: "Erro interno ao buscar SKUs" });
     }
   });
 }

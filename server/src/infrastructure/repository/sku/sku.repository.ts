@@ -15,6 +15,30 @@ export class SKURepository implements ISKURepository {
   constructor(prismaClient: PrismaClient) {
     this.prisma = prismaClient;
   }
+
+  async getById(id: string): Promise<SKUEntity | null> {
+    const skuData = await this.prisma.sKU.findUnique({
+    where: { id },
+    include: { product: true, composition: true, volumetry: true, packaging: true },
+  });
+
+  if (!skuData) return null;
+
+  const productEntity = new ProductEntity({ ...skuData.product });
+  const compositionValueObject = new CompositionValueObject({ ...skuData.composition });
+  const volumetryValueObject = new VolumetryValueObject({ ...skuData.volumetry });
+  const packagingValueObject = new PackagingValueObject({ ...skuData.packaging });
+
+  return new SKUEntity({
+    ...skuData,
+    status: skuData.status ?? SKUStatusEnum.PRE_CADASTRO,
+    product: productEntity,
+    composition: compositionValueObject,
+    volumetry: volumetryValueObject,
+    packaging: packagingValueObject,
+  });
+  }
+
   async update(id: string, skuData: SKUUpdateInput): Promise<boolean> {
     const data = SKUUpdateSchema.parse(skuData);
 

@@ -5,4 +5,5 @@ export interface ISKURepository {
     findAll(): Promise<SKUEntity[]>; 
     create(skuData: SKUCreateInput ): Promise<boolean>;
     update(id: string, skuData: SKUUpdateInput ): Promise<boolean>;
+    getById(id: string): Promise<SKUEntity | null>;
 }
