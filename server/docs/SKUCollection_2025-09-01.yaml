@@ -1,0 +1,189 @@
+type: collection.insomnia.rest/5.0
+name: SKUCollection
+meta:
+  id: wrk_fac5d41cccd04dce944084980eb11dd3
+  created: 1756776723055
+  modified: 1756776723055
+  description: ""
+collection:
+  - name: sku
+    meta:
+      id: fld_28d5d411f17741ea91da88cb29b082fb
+      created: 1756776762033
+      modified: 1756776762033
+      sortKey: -1756776762033
+      description: ""
+    children:
+      - url: http://localhost:3333/skus
+        name: SKU
+        meta:
+          id: req_ad8ab9878d1b41c0be92e4e7d2544ec3
+          created: 1756754331241
+          modified: 1756776770335
+          isPrivate: false
+          description: ""
+          sortKey: -1756776770307
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/skus
+        name: SKU
+        meta:
+          id: req_aa858f90f13a48f08747bb6a3ca1035d
+          created: 1756754468519
+          modified: 1756776775359
+          isPrivate: false
+          description: ""
+          sortKey: -1756776770357
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "skuCode": "EX12343",
+              "description": "Perfume floral feminino",
+              "commercialDescription": "Perfume floral, ideal para o dia a dia",
+              "status": "PRÉ-CADASTRO",
+              "productId": "08342552-208d-46e7-9606-2ac038c7c81a",
+              "compositionId": "007604fd-664f-4f23-ba84-e5e213c61205",
+              "volumetryId": "2bf9eba1-cf90-456e-bf56-0a0d106d67da",
+              "packagingId": "40919ac5-6cf2-4d42-9242-afdd980dee79",
+              "userCreate": "U017599"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/skus/a958c226-c489-4b37-b53b-a87282013adc
+        name: SKUs
+        meta:
+          id: req_390169481a6347d589127922ffc3869a
+          created: 1756758642855
+          modified: 1756776776933
+          isPrivate: false
+          description: ""
+          sortKey: -1756776770507
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {  
+              "description": "Perfume floral feminino3",
+              "commercialDescription": "Perfume floral, ideal para o dia a dia",
+              "status": "PRÉ-CADASTRO",
+              "productId": "08342552-208d-46e7-9606-2ac038c7c81a",
+              "compositionId": "007604fd-664f-4f23-ba84-e5e213c61205",
+              "volumetryId": "2bf9eba1-cf90-456e-bf56-0a0d106d67da",
+              "packagingId": "40919ac5-6cf2-4d42-9242-afdd980dee79",
+              "userUpdate": "U017599"
+            }
+        parameters:
+          - name: "{% faker 'guid' %}"
+            value: a958c226-c489-4b37-b53b-a87282013adc
+            disabled: true
+            id: pair_b5e1ad21af4040f48fa60b277d3c7a39
+          - name: ""
+            value: ""
+            disabled: true
+            id: pair_6c97566cac394047a8df26fc2b678729
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/skus/a958c226-c489-4b37-b53b-a87282013adc
+        name: SKU por id
+        meta:
+          id: req_50e70c2ef6ce47619f1f8db3a8587d16
+          created: 1756764102228
+          modified: 1756776772920
+          isPrivate: false
+          description: ""
+          sortKey: -1756776770407
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - url: http://localhost:3333/health
+    name: Health
+    meta:
+      id: req_a3097b3be2d641a3bf48d553d69fed79
+      created: 1756754396162
+      modified: 1756776237655
+      isPrivate: false
+      description: ""
+      sortKey: -1753743244618.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    scripts:
+      preRequest: ""
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_9aa54e4c22274c7fa79be952e2c0e86e
+    created: 1756754308801
+    modified: 1756754308801
+environments:
+  name: Base Environment
+  meta:
+    id: env_cb12a36d65c8438b91c01702157af234
+    created: 1756583832953
+    modified: 1756754308756
+    isPrivate: false
