@@ -1,5 +1,5 @@
-import { ISKURepository } from "../../../domain/repositories/sku.repository.interface.js";
-import { SKUCreateInput } from "../../../domain/validation/sku.schema.js";
+import { ISKURepository } from "../../../domain/repositories/sku.repository.interface";
+import { SKUCreateInput } from "../../../domain/validation/sku.schema";
 
 export class SKUCreateUseCase {
   private readonly skuRepository: ISKURepository;
@@ -9,7 +9,7 @@ export class SKUCreateUseCase {
   }
 
   async execute(
-    skuInput: SKUCreateInput 
+    skuInput: SKUCreateInput
   ): Promise<{ success: boolean; message: string }> {
     try {
       const result = await this.skuRepository.create(skuInput);

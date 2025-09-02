@@ -1,5 +1,5 @@
-import { SKUEntity } from '../entities/sku.entity.js';
-import { SKUCreateInput, SKUUpdateInput } from '../validation/sku.schema.js';
+import { SKUEntity } from '../entities/sku.entity';
+import { SKUCreateInput, SKUUpdateInput } from '../validation/sku.schema';
 
 export interface ISKURepository {
     findAll(): Promise<SKUEntity[]>; 

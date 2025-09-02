@@ -1,8 +1,8 @@
-import { ProductEntity } from './product.entity.js'
-import { CompositionValueObject } from '../value_objects/composition.vo.js'
-import { VolumetryValueObject } from '../value_objects/volumetry.vo.js'
-import { PackagingValueObject } from '../value_objects/packaging.vo.js'
-import { SKUStatusEnum } from '../enums/sku.enum.js'
+import { ProductEntity } from './product.entity'
+import { CompositionValueObject } from '../value_objects/composition.vo'
+import { VolumetryValueObject } from '../value_objects/volumetry.vo'
+import { PackagingValueObject } from '../value_objects/packaging.vo'
+import { SKUStatusEnum } from '../enums/sku.enum'
 
 
 export class SKUEntity {

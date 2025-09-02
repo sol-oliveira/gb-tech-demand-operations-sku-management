@@ -1,11 +1,12 @@
 import 'dotenv/config';
-import fastify from 'fastify';
+import Fastify, { FastifyInstance } from 'fastify';
 import { PrismaClient } from '@prisma/client';
 
-import { skuRoutes } from './routes/sku.routes.js';
-import { SKURepository } from '../infrastructure/repository/sku/sku.repository.js';
+import { skuRoutes } from './routes/sku.routes';
+import { SKURepository } from '../infrastructure/repository/sku/sku.repository';
 
-const app = fastify({ logger: true });
+
+const app: FastifyInstance = Fastify({ logger: true });
 const prisma = new PrismaClient();
 
 app.get('/health', async () => {

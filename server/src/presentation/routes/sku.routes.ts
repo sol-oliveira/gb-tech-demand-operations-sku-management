@@ -1,16 +1,14 @@
 import { FastifyInstance } from "fastify";
-import { ListSKUsUseCase } from "../../application/use-case/sku/find-all-skus-use-case.js";
-import { ISKURepository } from "../../domain/repositories/sku.repository.interface.js";
-import { SKUCreateUseCase } from "../../application/use-case/sku/create-sku-use-case.js";
+import { ListSKUsUseCase } from "../../application/use-case/sku/find-all-skus-use-case";
+import { ISKURepository } from "../../domain/repositories/sku.repository.interface";
+import { SKUCreateUseCase } from "../../application/use-case/sku/create-sku-use-case";
 import {
-  SKUCreateInput,
   SKUCreateSchema,
   SKUIdSchema,
   SKUUpdateSchema,
-} from "../../domain/validation/sku.schema.js";
-import z from "zod";
-import { SKUUpdateUseCase } from "../../application/use-case/sku/update-sku-use-case.js";
-import { SKUGetByIdUseCase } from "../../application/use-case/sku/get-sku-by-id-use-case.js";
+} from "../../domain/validation/sku.schema";
+import { SKUUpdateUseCase } from "../../application/use-case/sku/update-sku-use-case";
+import { SKUGetByIdUseCase } from "../../application/use-case/sku/get-sku-by-id-use-case";
 
 export async function skuRoutes(
   app: FastifyInstance,
@@ -30,8 +28,8 @@ export async function skuRoutes(
 
   app.post("/skus", async (request, reply) => {
     try {
-      const skuInputValidation = SKUCreateSchema.safeParse(request.body);     
-           
+      const skuInputValidation = SKUCreateSchema.safeParse(request.body);
+
       if (!skuInputValidation.success) {
         return reply.status(400).send({
           message: "Erro de validação nos dados enviados",
@@ -51,9 +49,8 @@ export async function skuRoutes(
   });
 
   app.patch("/skus/:id", async (request, reply) => {
-    try {     
-
-      const skuParamsValidation    = SKUIdSchema.safeParse(request.params);
+    try {
+      const skuParamsValidation = SKUIdSchema.safeParse(request.params);
       const skuBodyValidation = SKUUpdateSchema.safeParse(request.body);
 
       if (!skuBodyValidation.success || !skuParamsValidation.success) {

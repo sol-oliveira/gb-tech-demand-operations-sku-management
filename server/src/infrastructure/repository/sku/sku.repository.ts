@@ -1,13 +1,18 @@
-import { SKUEntity } from '../../../domain/entities/sku.entity.js';
-import { ProductEntity } from '../../../domain/entities/product.entity.js';
-import { CompositionValueObject } from '../../../domain/value_objects/composition.vo.js';
-import { VolumetryValueObject } from '../../../domain/value_objects/volumetry.vo.js';
-import { PackagingValueObject } from '../../../domain/value_objects/packaging.vo.js';
-import { SKUStatusEnum } from '../../../domain/enums/sku.enum.js';
-import { ISKURepository } from '../../../domain/repositories/sku.repository.interface.js';
-import { PrismaClient } from '@prisma/client';
-import { SKUCreateInput, SKUCreateSchema, SKUUpdateInput, SKUUpdateSchema } from '../../../domain/validation/sku.schema.js';
-import { console } from 'inspector';
+import { SKUEntity } from "../../../domain/entities/sku.entity";
+import { ProductEntity } from "../../../domain/entities/product.entity";
+import { CompositionValueObject } from "../../../domain/value_objects/composition.vo";
+import { VolumetryValueObject } from "../../../domain/value_objects/volumetry.vo";
+import { PackagingValueObject } from "../../../domain/value_objects/packaging.vo";
+import { SKUStatusEnum } from "../../../domain/enums/sku.enum";
+import { ISKURepository } from "../../../domain/repositories/sku.repository.interface";
+import { PrismaClient } from "@prisma/client";
+import {
+  SKUCreateInput,
+  SKUCreateSchema,
+  SKUUpdateInput,
+  SKUUpdateSchema,
+} from "../../../domain/validation/sku.schema";
+import { console } from "inspector";
 
 export class SKURepository implements ISKURepository {
   private prisma: PrismaClient;
@@ -18,25 +23,36 @@ export class SKURepository implements ISKURepository {
 
   async getById(id: string): Promise<SKUEntity | null> {
     const skuData = await this.prisma.sKU.findUnique({
-    where: { id },
-    include: { product: true, composition: true, volumetry: true, packaging: true },
-  });
+      where: { id },
+      include: {
+        product: true,
+        composition: true,
+        volumetry: true,
+        packaging: true,
+      },
+    });
 
-  if (!skuData) return null;
+    if (!skuData) return null;
 
-  const productEntity = new ProductEntity({ ...skuData.product });
-  const compositionValueObject = new CompositionValueObject({ ...skuData.composition });
-  const volumetryValueObject = new VolumetryValueObject({ ...skuData.volumetry });
-  const packagingValueObject = new PackagingValueObject({ ...skuData.packaging });
+    const productEntity = new ProductEntity({ ...skuData.product });
+    const compositionValueObject = new CompositionValueObject({
+      ...skuData.composition,
+    });
+    const volumetryValueObject = new VolumetryValueObject({
+      ...skuData.volumetry,
+    });
+    const packagingValueObject = new PackagingValueObject({
+      ...skuData.packaging,
+    });
 
-  return new SKUEntity({
-    ...skuData,
-    status: skuData.status ?? SKUStatusEnum.PRE_CADASTRO,
-    product: productEntity,
-    composition: compositionValueObject,
-    volumetry: volumetryValueObject,
-    packaging: packagingValueObject,
-  });
+    return new SKUEntity({
+      ...skuData,
+      status: (skuData.status as SKUStatusEnum) ?? SKUStatusEnum.PRE_CADASTRO,
+      product: productEntity,
+      composition: compositionValueObject,
+      volumetry: volumetryValueObject,
+      packaging: packagingValueObject,
+    });
   }
 
   async update(id: string, skuData: SKUUpdateInput): Promise<boolean> {
@@ -124,4 +140,3 @@ export class SKURepository implements ISKURepository {
     });
   }
 }
-

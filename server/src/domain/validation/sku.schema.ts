@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SKUStatusEnum } from '../enums/sku.enum.js';
+import { SKUStatusEnum } from '../enums/sku.enum';
 
 export const SKUIdSchema = z.object({
       id: z.string().uuid(),
