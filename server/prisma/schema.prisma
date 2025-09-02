@@ -87,10 +87,10 @@ model SKU {
   userCreate         String
   userUpdate         String? 
 
-  product           Product     @relation(fields: [productId], references: [id])
-  composition       Composition @relation(fields: [compositionId], references: [id])
-  volumetry         Volumetry   @relation(fields: [volumetryId], references: [id])
-  packaging         Packaging   @relation(fields: [packagingId], references: [id])
+  product           Product     @relation(fields: [productId], references: [id])  
+  composition       Composition @relation(fields: [compositionId], references: [compositionUniqueKey])
+  volumetry         Volumetry   @relation(fields: [volumetryId], references: [volumetryUniqueKey])
+  packaging         Packaging   @relation(fields: [packagingId], references: [packagingUniqueKey])
 
   @@map("skus")
 }

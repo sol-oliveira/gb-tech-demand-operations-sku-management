@@ -37,12 +37,15 @@ export class SKURepository implements ISKURepository {
     const productEntity = new ProductEntity({ ...skuData.product });
     const compositionValueObject = new CompositionValueObject({
       ...skuData.composition,
+      compositionUniqueKey: skuData.composition.id,
     });
     const volumetryValueObject = new VolumetryValueObject({
       ...skuData.volumetry,
+      volumetryUniqueKey: skuData.volumetry.id,
     });
     const packagingValueObject = new PackagingValueObject({
       ...skuData.packaging,
+      packagingUniqueKey: skuData.packaging.id,
     });
 
     return new SKUEntity({
@@ -71,10 +74,16 @@ export class SKURepository implements ISKURepository {
   }
 
   async create(skuData: SKUCreateInput): Promise<boolean> {
+    console.log({ data: skuData });
     const data = SKUCreateSchema.parse(skuData);
+    console.log({ data });
 
     try {
-      await this.prisma.sKU.create({ data });
+      await this.prisma.sKU.create({
+        data: {
+          ...data,
+        },
+      });
       return true;
     } catch (error) {
       console.error("Error creating SKU:", error);
@@ -108,18 +117,18 @@ export class SKURepository implements ISKURepository {
       });
 
       const compositionValueObject = new CompositionValueObject({
-        formula: data.composition.formula,
-        keyIngredients: data.composition.keyIngredients,
+        ...data.composition,
+        compositionUniqueKey: data.composition.id,
       });
 
       const volumetryValueObject = new VolumetryValueObject({
-        value: data.volumetry.value,
-        unit: data.volumetry.unit,
+        ...data.volumetry,
+        volumetryUniqueKey: data.volumetry.id,
       });
 
       const packagingValueObject = new PackagingValueObject({
-        type: data.packaging.type,
-        material: data.packaging.material,
+        ...data.packaging,
+        packagingUniqueKey: data.packaging.id,
       });
 
       return new SKUEntity({
