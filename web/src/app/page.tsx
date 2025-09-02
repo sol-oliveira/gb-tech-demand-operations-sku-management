@@ -1,3 +1,4 @@
+import { SKUTable } from "@/components/SKUTable";
 import Image from "next/image";
 
 export default function Home() {
@@ -12,7 +13,9 @@ export default function Home() {
           height={38}
           priority
         />
-       
+
+        <SKUTable skus={[]} />
+
       </main>
       
     </div>
