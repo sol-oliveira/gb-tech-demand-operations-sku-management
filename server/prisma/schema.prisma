@@ -29,12 +29,13 @@ model Packaging {
   id       String      @id @default(uuid())
   material String  
   type     String 
+  packagingUniqueKey String  @unique
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
   userCreate String
   userUpdate String?  
 
-   skus       SKU[] // Campo de relação reversa exigencia do Prisma
+  skus       SKU[] // Campo de relação reversa exigencia do Prisma
   @@map("packagings")
 
 }
@@ -42,7 +43,8 @@ model Packaging {
 model Volumetry {
   id       String      @id @default(uuid())
   value    Float
-  unit     String 
+  unit     String
+  volumetryUniqueKey String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
   userCreate String
@@ -57,6 +59,7 @@ model Composition {
   id                String      @id @default(uuid())
   formula           String
   keyIngredients    String
+  compositionUniqueKey String @unique
   createdAt         DateTime @default(now())
   updatedAt         DateTime? @updatedAt
   userCreate        String
