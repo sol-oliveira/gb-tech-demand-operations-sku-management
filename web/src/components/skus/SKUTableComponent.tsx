@@ -68,24 +68,17 @@ export function SKUTableComponent({ skus }: SKUTableProps) {
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 <div className="font-medium">{sku.composition.formula}</div>
-                <div className="text-gray-500 text-xs">
+                <div className="text-gray-500 text-xs whitespace-normal">
                   {sku.composition.keyIngredients}
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <Link
-                  title="Visualizar SKU"
-                  href={`/skus/${sku.skuCode}`}
-                  className="text-indigo-600 hover:text-indigo-900 mr-3"
-                >
-                  🔎
-                </Link>
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
                 <Link
                   title="Editar SKU"
                   href={`/skus/${sku.skuCode}/edit`}
-                  className="text-gray-600 hover:text-gray-900"
+                  className="text-gray-600 hover:text-gray-900 justify-center"
                 >
-                  📝
+                  📝 Editar
                 </Link>
               </td>
             </tr>
