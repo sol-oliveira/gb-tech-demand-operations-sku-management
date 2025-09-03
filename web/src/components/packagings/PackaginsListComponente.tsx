@@ -5,6 +5,7 @@ interface PackagingsListProps {
   loading: boolean;
   formData: Partial<SKUEntity>;
   setFormData: React.Dispatch<React.SetStateAction<Partial<SKUEntity>>>;
+  isSubmitted: boolean;
 }
 
 export function PackagingsListComponent({
@@ -12,6 +13,7 @@ export function PackagingsListComponent({
   loading,
   formData,
   setFormData,
+  isSubmitted,
 }: PackagingsListProps) {
   const handlePackagingChange = (packagingId: string) => {
     const selectedPackaging = packagings?.find(
@@ -41,7 +43,11 @@ export function PackagingsListComponent({
             <select
               value={formData.packaging?.packagingUniqueKey || ""}
               onChange={(e) => handlePackagingChange(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
+                isSubmitted && !formData.packaging?.packagingUniqueKey
+                  ? "border-red-500"
+                  : "border-gray-300"
+              }`}
             >
               <option value="">Selecione uma embalagem</option>
               {packagings?.map((packaging) => (

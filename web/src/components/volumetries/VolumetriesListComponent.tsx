@@ -5,6 +5,7 @@ interface VolumetriesListProps {
   loading: boolean;
   formData: Partial<SKUEntity>;
   setFormData: React.Dispatch<React.SetStateAction<Partial<SKUEntity>>>;
+  isSubmitted: boolean;
 }
 
 export function VolumetriesListComponent({
@@ -12,6 +13,7 @@ export function VolumetriesListComponent({
   loading,
   formData,
   setFormData,
+  isSubmitted,
 }: VolumetriesListProps) {
   const handleVolumetryChange = (volumetryId: string) => {
     const selectedVolumetry = volumetries?.find(
@@ -41,7 +43,11 @@ export function VolumetriesListComponent({
             <select
               value={formData.volumetry?.volumetryUniqueKey || ""}
               onChange={(e) => handleVolumetryChange(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
+                isSubmitted && !formData.volumetry?.volumetryUniqueKey
+                  ? "border-red-500"
+                  : "border-gray-300"
+              }`}
             >
               <option value="">Selecione uma volumetria</option>
               {volumetries?.map((volumetry) => (

@@ -5,6 +5,7 @@ interface ProductsListProps {
   loadingProducts: boolean;
   formData: Partial<SKUEntity>;
   setFormData: React.Dispatch<React.SetStateAction<Partial<SKUEntity>>>;
+  isSubmitted: boolean;
 }
 
 export function ProductsListComponent({
@@ -12,6 +13,7 @@ export function ProductsListComponent({
   loadingProducts,
   formData,
   setFormData,
+  isSubmitted,
 }: ProductsListProps) {
   const handleProductChange = (productId: string) => {
     const selectedProduct = products?.find((p) => p.id === productId);
@@ -39,7 +41,12 @@ export function ProductsListComponent({
             <select
               value={formData.product?.id || ""}
               onChange={(e) => handleProductChange(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+              required
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
+                isSubmitted && !formData.product?.id
+                  ? "border-red-500"
+                  : "border-gray-300"
+              }`}
             >
               <option value="">Selecione um produto</option>
               {products?.map((product) => (

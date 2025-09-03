@@ -3,11 +3,13 @@ import { SKUEntity, SKUStatusEnum } from "@/types/sku";
 interface SKUFormComponentProps {
   formData: Partial<SKUEntity>;
   setFormData: React.Dispatch<React.SetStateAction<Partial<SKUEntity>>>;
+  isSubmitted: boolean;
 }
 
 export function SKUFormComponent({
   formData,
   setFormData,
+  isSubmitted,
 }: SKUFormComponentProps) {
   const handleInputChange = (field: string, value: any) => {
     setFormData((prev) => ({
@@ -41,7 +43,12 @@ export function SKUFormComponent({
               value={formData.skuCode || ""}
               onChange={(e) => handleInputChange("skuCode", e.target.value)}
               placeholder="Ex: CAB-123456"
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+              required
+              className={`flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
+                isSubmitted && !formData.skuCode
+                  ? "border-red-500 text-red-600"
+                  : "border-gray-300"
+              }`}
             />
             <button
               type="button"
@@ -58,14 +65,18 @@ export function SKUFormComponent({
           </label>
           <select
             value={formData.status || ""}
+            required
+            disabled
             onChange={(e) => handleInputChange("status", e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
+              isSubmitted && !formData.skuCode
+                ? "border-red-500 text-red-600"
+                : "border-gray-300"
+            }`}
           >
             <option value={SKUStatusEnum.CADASTRO_COMPLETO}>
-              Cadastro Completo
+              Pré cadastro
             </option>
-            <option value={SKUStatusEnum.DESATIVADO}>Desativado</option>
-            <option value={SKUStatusEnum.CANCELADO}>Cancelado</option>
           </select>
         </div>
         <div className="md:col-span-2">
@@ -77,7 +88,12 @@ export function SKUFormComponent({
             value={formData.description || ""}
             onChange={(e) => handleInputChange("description", e.target.value)}
             placeholder="Ex: Shampoo Cabelos Oleosos 300ml"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+            required
+            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
+              isSubmitted && !formData.skuCode
+                ? "border-red-500 text-red-600"
+                : "border-gray-300"
+            }`}
           />
         </div>
         <div className="md:col-span-2">
@@ -89,9 +105,14 @@ export function SKUFormComponent({
             onChange={(e) =>
               handleInputChange("commercialDescription", e.target.value)
             }
+            required
             rows={3}
             placeholder="Descrição que será exibida para o cliente final"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
+              isSubmitted && !formData.skuCode
+                ? "border-red-500 text-red-600"
+                : "border-gray-300"
+            } `}
           />
         </div>
       </div>

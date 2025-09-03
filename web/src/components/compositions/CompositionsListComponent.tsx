@@ -5,6 +5,7 @@ interface CompositionsListProps {
   loading: boolean;
   formData: Partial<SKUEntity>;
   setFormData: React.Dispatch<React.SetStateAction<Partial<SKUEntity>>>;
+  isSubmitted: boolean;
 }
 
 export function CompositionsListComponent({
@@ -12,6 +13,7 @@ export function CompositionsListComponent({
   loading,
   formData,
   setFormData,
+  isSubmitted,
 }: CompositionsListProps) {
   const handleCompositionChange = (compositionId: string) => {
     const selectedComposition = compositions?.find(
@@ -41,7 +43,11 @@ export function CompositionsListComponent({
             <select
               value={formData.composition?.compositionUniqueKey || ""}
               onChange={(e) => handleCompositionChange(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
+                isSubmitted && !formData.composition?.compositionUniqueKey
+                  ? "border-red-500"
+                  : "border-gray-300"
+              }`}
             >
               <option value="">Selecione uma composição</option>
               {compositions?.map((composition) => (
