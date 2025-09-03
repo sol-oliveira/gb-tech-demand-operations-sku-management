@@ -13,22 +13,41 @@ import { VolumetriesListComponent } from "@/components/volumetries/VolumetriesLi
 import { CompositionsListComponent } from "@/components/compositions/CompositionsListComponent";
 import { SKUHeaderCreateComponent } from "@/components/skus/SKUHeaderCreateComponent";
 import { SKUFormComponent } from "@/components/skus/SKUFormComponent";
+import { useCreateSKU } from "@/hooks/sku/useCreateSKU";
+import { SKURequest } from "@/types/skuRequest";
+
+function validateRequiredFields(
+  obj: Partial<SKUEntity>,
+  fields: (keyof SKUEntity)[]
+) {
+  for (const field of fields) {
+    const value = obj[field];
+    if (value === "" || value === null || value === undefined) {
+      return `${field} é obrigatório`;
+    }
+  }
+  return null; // tudo ok
+}
 
 export default function CreateSKUPage() {
-  const router = useRouter();
   const [saving, setSaving] = useState(false);
-
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState<Partial<SKUEntity>>({
     skuCode: "",
     description: "",
     commercialDescription: "",
-    status: SKUStatusEnum.PRE_CADASTRO,
+    status: "",
     product: undefined,
     composition: undefined,
     volumetry: undefined,
     packaging: undefined,
-    userCreate: "U017599",
+    userCreate: "",
+    userUpdate: "",
   });
+
+  const { mutateAsync: createSKU, isPending } = useCreateSKU();
+
+  const router = useRouter();
 
   const { data: products, isLoading: loadingProducts } = useListProducts();
   const { data: packagings, isLoading: loadingPackagings } =
@@ -38,47 +57,45 @@ export default function CreateSKUPage() {
   const { data: compositions, isLoading: loadingCompositions } =
     useListCompositions();
 
-  const validateForm = () => {
-    if (!formData.skuCode) return "Código SKU é obrigatório";
-    if (!formData.description) return "Descrição é obrigatória";
-    if (!formData.commercialDescription)
-      return "Descrição comercial é obrigatória";
-    if (!formData.product) return "Produto deve ser selecionado";
-    if (!formData.composition?.formula)
-      return "Origem da composição é obrigatória";
-    if (!formData.composition?.keyIngredients)
-      return "Pelo menos um material é obrigatório";
-  };
-
   const handleSave = async () => {
-    const validationError = validateForm();
-    if (validationError) {
-      alert(validationError);
-      return;
-    }
-
     try {
+      setIsSubmitted(true);
       setSaving(true);
 
-      // Preparar os dados finais
-      const newSKU: SKUEntity = {
-        ...formData,
-        createdAt: new Date(),
-        updatedAt: null,
-        userUpdate: null,
-      } as SKUEntity;
+      const error = validateRequiredFields(formData, [
+        "skuCode",
+        "description",
+        "commercialDescription",
+        "product",
+        "composition",
+        "volumetry",
+        "packaging",
+      ]);
 
-      // Simula salvamento
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Novo SKU criado:", newSKU);
+      if (error) return;
 
-      // Redirecionar para a página de detalhes do SKU criado
-      router.push(`/skus/${newSKU.skuCode}`);
+      const payload = {
+        skuCode: formData.skuCode,
+        description: formData.description,
+        commercialDescription: formData.commercialDescription,
+        status: SKUStatusEnum.PRE_CADASTRO,
+        productId: formData.product?.id,
+        compositionId: formData.composition?.compositionUniqueKey,
+        volumetryId: formData.volumetry?.volumetryUniqueKey,
+        packagingId: formData.packaging?.packagingUniqueKey,
+        userCreate: "U017599",
+      } as SKURequest;
+
+      await createSKU(payload);
+
+      router.push(`/skus`);
     } catch (error) {
       console.error("Erro ao criar SKU:", error);
       alert("Erro ao criar SKU. Tente novamente.");
+      setSaving(false);
     } finally {
       setSaving(false);
+      setIsSubmitted(false);
     }
   };
 
@@ -96,7 +113,11 @@ export default function CreateSKUPage() {
           {/* Formulário Principal */}
           <div className="lg:col-span-2 space-y-6">
             {/* SKU */}
-            <SKUFormComponent formData={formData} setFormData={setFormData} />
+            <SKUFormComponent
+              formData={formData}
+              setFormData={setFormData}
+              isSubmitted={isSubmitted}
+            />
 
             {/* Produto */}
             <ProductsListComponent
@@ -104,6 +125,7 @@ export default function CreateSKUPage() {
               loadingProducts={loadingProducts}
               formData={formData}
               setFormData={setFormData}
+              isSubmitted={isSubmitted}
             />
 
             {/* Composição */}
@@ -112,6 +134,7 @@ export default function CreateSKUPage() {
               loading={loadingCompositions}
               formData={formData}
               setFormData={setFormData}
+              isSubmitted={isSubmitted}
             />
           </div>
 
@@ -123,6 +146,7 @@ export default function CreateSKUPage() {
               loading={loadingVolumetries}
               formData={formData}
               setFormData={setFormData}
+              isSubmitted={isSubmitted}
             />
 
             {/* Embalagem */}
@@ -131,6 +155,7 @@ export default function CreateSKUPage() {
               loading={loadingPackagings}
               formData={formData}
               setFormData={setFormData}
+              isSubmitted={isSubmitted}
             />
             {/* Informações Adicionais */}
             <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">

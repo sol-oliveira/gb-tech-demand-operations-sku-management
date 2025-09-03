@@ -64,7 +64,7 @@ export function SKUFormComponent({
             Status
           </label>
           <select
-            value={formData.status || ""}
+            value={SKUStatusEnum.PRE_CADASTRO}
             required
             disabled
             onChange={(e) => handleInputChange("status", e.target.value)}
@@ -74,9 +74,7 @@ export function SKUFormComponent({
                 : "border-gray-300"
             }`}
           >
-            <option value={SKUStatusEnum.CADASTRO_COMPLETO}>
-              Pré cadastro
-            </option>
+            <option value={SKUStatusEnum.PRE_CADASTRO}>Pré cadastro</option>
           </select>
         </div>
         <div className="md:col-span-2">
