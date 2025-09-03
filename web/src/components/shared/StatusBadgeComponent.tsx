@@ -27,7 +27,7 @@ const statusConfig = {
   },
 };
 
-export function StatusBadgeComponente({ status }: StatusBadgeProps) {
+export function StatusBadgeComponent({ status }: StatusBadgeProps) {
   const config = statusConfig[status];
 
   return (

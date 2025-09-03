@@ -41,7 +41,7 @@ export function SKUTableComponent({ skus }: SKUTableProps) {
         <tbody className="bg-white divide-y divide-gray-200">
           {skus.map((sku) => (
             <tr key={sku.id} className="hover:bg-gray-50">
-              <td className="px-2 py-4 whitespace-nowrap max-w-[50px] gap-2 text-sm font-medium text-gray-900">
+              <td className="px-1 py-4 whitespace-nowrap max-w-[50px] gap-1 text-sm font-medium text-gray-900">
                 {sku.skuCode}
               </td>
               <td className="px-4 py-4 text-sm text-gray-900 gap-1">
