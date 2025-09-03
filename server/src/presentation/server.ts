@@ -10,6 +10,8 @@ import { compositionRoutes } from "./routes/composition.routes";
 import { CompositionRepository } from "../infrastructure/repository/composition/composition.repository";
 import { packagingRoutes } from "./routes/packaging.routes";
 import { PackagingRepository } from "../infrastructure/repository/packaging/packaging.repository";
+import { VolumetryRepository } from "../infrastructure/repository/volumetry/volumetry";
+import { volumetryRoutes } from "./routes/volumetry.routes";
 
 const app: FastifyInstance = Fastify({ logger: true });
 
@@ -37,6 +39,9 @@ app.register(compositionRoutes, {
 });
 app.register(packagingRoutes, {
   packagingRepository: new PackagingRepository(prisma),
+});
+app.register(volumetryRoutes, {
+  volumetryRepository: new VolumetryRepository(prisma),
 });
 
 const start = async () => {
