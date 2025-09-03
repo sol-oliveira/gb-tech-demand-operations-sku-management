@@ -1,34 +1,37 @@
 export enum SKUStatusEnum {
-  PRE_CADASTRO = 'PRÉ-CADASTRO',
-  CADASTRO_COMPLETO = 'CADASTRO COMPLETO',
-  ATIVO = 'ATIVO',
-  DESATIVADO = 'DESATIVADO',
-  CANCELADO = 'CANCELADO',
+  PRE_CADASTRO = "PRÉ-CADASTRO",
+  CADASTRO_COMPLETO = "CADASTRO COMPLETO",
+  ATIVO = "ATIVO",
+  DESATIVADO = "DESATIVADO",
+  CANCELADO = "CANCELADO",
 }
 
 export interface ProductEntity {
   id: string;
   name: string;
   description: string;
-  brand: string;  
+  brand: string;
 }
 
 export interface CompositionValueObject {
-  formula: string, 
-  unikeyIngredients: string
+  formula: string;
+  keyIngredients: string;
+  compositionUniqueKey: string;
 }
 
 export interface VolumetryValueObject {
-  value: number; 
-  unit: string;  
+  value: number;
+  unit: string;
+  volumetryUniqueKey: string;
 }
 
 export interface PackagingValueObject {
   type: string;
-  material: string;  
+  material: string;
+  packagingUniqueKey: string;
 }
 
-export interface SKUEntity {  
+export interface SKUEntity {
   id: string;
   skuCode: string;
   description: string;
@@ -37,5 +40,6 @@ export interface SKUEntity {
   product: ProductEntity;
   composition: CompositionValueObject;
   volumetry: VolumetryValueObject;
-  packaging: PackagingValueObject;  
+  packaging: PackagingValueObject;
+  userCreate: string;
 }
