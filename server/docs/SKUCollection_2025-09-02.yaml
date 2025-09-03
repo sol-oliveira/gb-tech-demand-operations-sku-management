@@ -1,0 +1,316 @@
+type: collection.insomnia.rest/5.0
+name: SKUCollection
+meta:
+  id: wrk_fac5d41cccd04dce944084980eb11dd3
+  created: 1756776723055
+  modified: 1756776723055
+  description: ""
+collection:
+  - name: sku
+    meta:
+      id: fld_28d5d411f17741ea91da88cb29b082fb
+      created: 1756776762033
+      modified: 1756776762033
+      sortKey: -1756776762033
+      description: ""
+    children:
+      - url: http://localhost:3333/skus
+        name: SKU
+        meta:
+          id: req_aa858f90f13a48f08747bb6a3ca1035d
+          created: 1756754468519
+          modified: 1756826546543
+          isPrivate: false
+          description: ""
+          sortKey: -1756776770357
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "skuCode": "EX12343",
+              "description": "Perfume floral feminino",
+              "commercialDescription": "Perfume floral, ideal para o dia a dia",
+              "status": "PRÉ-CADASTRO",
+              "productId": "1b29dd11-e1ab-494d-92d8-b4208a59eaaa",
+              "compositionId": "leave_in_protetor_termico",
+              "volumetryId": "100ml",
+              "packagingId": "aluminio_aerossol",
+              "userCreate": "U017599"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/skus/a7422096-8c83-46dc-a73b-c2b4d22fd3c6
+        name: SKUs
+        meta:
+          id: req_390169481a6347d589127922ffc3869a
+          created: 1756758642855
+          modified: 1756845661288
+          isPrivate: false
+          description: ""
+          sortKey: -1756776770507
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |
+            {  
+              "skuCode": "EX12343",
+              "description": "Perfume floral feminino1",
+              "commercialDescription": "Perfume floral, ideal para o dia a dia",
+              "status": "CANCELADO",
+              "productId": "1b29dd11-e1ab-494d-92d8-b4208a59eaaa",
+              "compositionId": "leave_in_protetor_termico",
+              "volumetryId": "100ml",
+              "packagingId": "aluminio_aerossol",
+              "userUpdate": "U017599"
+            }
+        parameters:
+          - name: "{% faker 'guid' %}"
+            value: a958c226-c489-4b37-b53b-a87282013adc
+            disabled: true
+            id: pair_b5e1ad21af4040f48fa60b277d3c7a39
+          - name: ""
+            value: ""
+            disabled: true
+            id: pair_6c97566cac394047a8df26fc2b678729
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/skus/a7422096-8c83-46dc-a73b-c2b4d22fd3c6
+        name: SKU por id
+        meta:
+          id: req_50e70c2ef6ce47619f1f8db3a8587d16
+          created: 1756764102228
+          modified: 1756836307760
+          isPrivate: false
+          description: ""
+          sortKey: -1756776770407
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/skus
+        name: SKU
+        meta:
+          id: req_5460e86ef41f403dbeffb758b43b1358
+          created: 1756865167035
+          modified: 1756865167035
+          isPrivate: false
+          description: ""
+          sortKey: -1756765550774
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: product
+    meta:
+      id: fld_7716db3558d44f0ab62d203d8b903f47
+      created: 1756865142027
+      modified: 1756865142027
+      sortKey: -1756865142027
+      description: ""
+    children:
+      - url: http://localhost:3333/products
+        name: Products
+        meta:
+          id: req_ad8ab9878d1b41c0be92e4e7d2544ec3
+          created: 1756754331241
+          modified: 1756865231103
+          isPrivate: false
+          description: ""
+          sortKey: -1756865169968
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Composition
+    meta:
+      id: fld_44d2c16c852b473d900d48ddb0da5ad2
+      created: 1756866247337
+      modified: 1756866247337
+      sortKey: -1756866247338
+      description: ""
+  - name: Packaging
+    meta:
+      id: fld_162468111ba547818031f28dbad634cc
+      created: 1756867031368
+      modified: 1756867103313
+      sortKey: -1756867031368
+      description: ""
+    children:
+      - url: http://localhost:3333/packagings
+        name: Packaging
+        meta:
+          id: req_cebc8d6ebb864de5a00df0a5187807bd
+          created: 1756866255929
+          modified: 1756867160470
+          isPrivate: false
+          description: ""
+          sortKey: -1756867056716
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Volumetry
+    meta:
+      id: fld_2772d71d622b440c8e7dbe40d4421a9f
+      created: 1756867932617
+      modified: 1756867932617
+      sortKey: -1756867932617
+      description: ""
+  - url: http://localhost:3333/health
+    name: Health
+    meta:
+      id: req_a3097b3be2d641a3bf48d553d69fed79
+      created: 1756754396162
+      modified: 1756776237655
+      isPrivate: false
+      description: ""
+      sortKey: -1753743244618.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    scripts:
+      preRequest: ""
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/volumetries
+    name: Volumetries
+    meta:
+      id: req_86b649e8260844bab7a21f9632e2ac71
+      created: 1756867037860
+      modified: 1756867984352
+      isPrivate: false
+      description: ""
+      sortKey: -1756867481992.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    scripts:
+      preRequest: ""
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/compositions
+    name: Compositions
+    meta:
+      id: req_73d5059f8d02423081a1e2d94c603c05
+      created: 1756867952520
+      modified: 1756867952520
+      isPrivate: false
+      description: ""
+      sortKey: -1756865301146.625
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    scripts:
+      preRequest: ""
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_9aa54e4c22274c7fa79be952e2c0e86e
+    created: 1756754308801
+    modified: 1756754308801
+environments:
+  name: Base Environment
+  meta:
+    id: env_cb12a36d65c8438b91c01702157af234
+    created: 1756583832953
+    modified: 1756754308756
+    isPrivate: false
