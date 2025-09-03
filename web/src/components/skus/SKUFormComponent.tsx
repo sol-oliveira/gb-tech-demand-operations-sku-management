@@ -44,6 +44,7 @@ export function SKUFormComponent({
               onChange={(e) => handleInputChange("skuCode", e.target.value)}
               placeholder="Ex: CAB-123456"
               required
+              readOnly={!!formData.id}
               className={`flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
                 isSubmitted && !formData.id
                   ? "border-red-500 text-red-600"
@@ -52,6 +53,7 @@ export function SKUFormComponent({
             />
             <button
               type="button"
+              hidden={!formData.id}
               onClick={generateSKUCode}
               className="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 text-sm"
             >
@@ -66,7 +68,7 @@ export function SKUFormComponent({
           <select
             value={formData.status || ""}
             required
-            disabled={!!formData.id}
+            disabled={!formData.id}
             onChange={(e) => handleInputChange("status", e.target.value)}
             className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
               isSubmitted && !formData.skuCode

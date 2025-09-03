@@ -75,7 +75,7 @@ export function SKUTableComponent({ skus }: SKUTableProps) {
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
                 <Link
                   title="Editar SKU"
-                  href={`/skus/${sku.skuCode}/edit`}
+                  href={`/skus/${sku.id}/edit`}
                   className="text-gray-600 hover:text-gray-900 justify-center"
                 >
                   📝 Editar
