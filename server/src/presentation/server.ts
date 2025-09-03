@@ -17,6 +17,7 @@ const app: FastifyInstance = Fastify({ logger: true });
 
 app.register(cors, {
   origin: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 });
 
 const prisma = new PrismaClient();
