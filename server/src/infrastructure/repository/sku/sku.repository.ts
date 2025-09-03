@@ -37,15 +37,15 @@ export class SKURepository implements ISKURepository {
     const productEntity = new ProductEntity({ ...skuData.product });
     const compositionValueObject = new CompositionValueObject({
       ...skuData.composition,
-      compositionUniqueKey: skuData.composition.id,
+      compositionUniqueKey: skuData.composition.compositionUniqueKey,
     });
     const volumetryValueObject = new VolumetryValueObject({
       ...skuData.volumetry,
-      volumetryUniqueKey: skuData.volumetry.id,
+      volumetryUniqueKey: skuData.volumetry.volumetryUniqueKey,
     });
     const packagingValueObject = new PackagingValueObject({
       ...skuData.packaging,
-      packagingUniqueKey: skuData.packaging.id,
+      packagingUniqueKey: skuData.packaging.packagingUniqueKey,
     });
 
     return new SKUEntity({
