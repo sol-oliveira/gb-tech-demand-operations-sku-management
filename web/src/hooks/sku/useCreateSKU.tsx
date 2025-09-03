@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createSKU } from "@/api/sku/createSKU";
+import { createSKU } from "@/api/sku/apiSKU";
 import { SKURequest } from "@/types/skuRequest";
 
 export const useCreateSKU = () => {
