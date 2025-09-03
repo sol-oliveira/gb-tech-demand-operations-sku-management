@@ -42,4 +42,5 @@ export interface SKUEntity {
   volumetry: VolumetryValueObject;
   packaging: PackagingValueObject;
   userCreate: string;
+  userUpdate: string;
 }
