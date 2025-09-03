@@ -6,6 +6,8 @@ import { SKURepository } from "../infrastructure/repository/sku/sku.repository";
 import cors from "@fastify/cors";
 import { productRoutes } from "./routes/product.routes";
 import { ProductRepository } from "../infrastructure/repository/product/product.repository";
+import { compositionRoutes } from "./routes/composition.routes";
+import { CompositionRepository } from "../infrastructure/repository/composition/composition.repository";
 
 const app: FastifyInstance = Fastify({ logger: true });
 
@@ -27,6 +29,9 @@ app.get("/health", async () => {
 app.register(skuRoutes, { skuRepository: new SKURepository(prisma) });
 app.register(productRoutes, {
   productRepository: new ProductRepository(prisma),
+});
+app.register(compositionRoutes, {
+  compositionRepository: new CompositionRepository(prisma),
 });
 
 const start = async () => {
