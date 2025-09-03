@@ -42,5 +42,6 @@
     "skipLibCheck": true,
     "moduleResolution": "Node",
     "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types", "./presentation"]
   }
 }
