@@ -45,7 +45,7 @@ export function SKUFormComponent({
               placeholder="Ex: CAB-123456"
               required
               className={`flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
-                isSubmitted && !formData.skuCode
+                isSubmitted && !formData.id
                   ? "border-red-500 text-red-600"
                   : "border-gray-300"
               }`}
@@ -64,9 +64,9 @@ export function SKUFormComponent({
             Status
           </label>
           <select
-            value={SKUStatusEnum.PRE_CADASTRO}
+            value={formData.status || ""}
             required
-            disabled
+            disabled={!!formData.id}
             onChange={(e) => handleInputChange("status", e.target.value)}
             className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 ${
               isSubmitted && !formData.skuCode
@@ -74,7 +74,13 @@ export function SKUFormComponent({
                 : "border-gray-300"
             }`}
           >
-            <option value={SKUStatusEnum.PRE_CADASTRO}>Pré cadastro</option>
+            <option value={SKUStatusEnum.PRE_CADASTRO}>Pré-cadastro</option>
+            <option value={SKUStatusEnum.CADASTRO_COMPLETO}>
+              Cadastro Completo
+            </option>
+            <option value={SKUStatusEnum.ATIVO}>Ativo</option>
+            <option value={SKUStatusEnum.DESATIVADO}>Desativado</option>
+            <option value={SKUStatusEnum.CANCELADO}>Cancelado</option>
           </select>
         </div>
         <div className="md:col-span-2">
