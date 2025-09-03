@@ -4,6 +4,8 @@ import { PrismaClient } from "@prisma/client";
 import { skuRoutes } from "./routes/sku.routes";
 import { SKURepository } from "../infrastructure/repository/sku/sku.repository";
 import cors from "@fastify/cors";
+import { productRoutes } from "./routes/product.routes";
+import { ProductRepository } from "../infrastructure/repository/product/product.repository";
 
 const app: FastifyInstance = Fastify({ logger: true });
 
@@ -23,6 +25,9 @@ app.get("/health", async () => {
 });
 
 app.register(skuRoutes, { skuRepository: new SKURepository(prisma) });
+app.register(productRoutes, {
+  productRepository: new ProductRepository(prisma),
+});
 
 const start = async () => {
   try {
