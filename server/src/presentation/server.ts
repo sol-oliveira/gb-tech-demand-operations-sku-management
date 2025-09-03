@@ -8,6 +8,8 @@ import { productRoutes } from "./routes/product.routes";
 import { ProductRepository } from "../infrastructure/repository/product/product.repository";
 import { compositionRoutes } from "./routes/composition.routes";
 import { CompositionRepository } from "../infrastructure/repository/composition/composition.repository";
+import { packagingRoutes } from "./routes/packaging.routes";
+import { PackagingRepository } from "../infrastructure/repository/packaging/packaging.repository";
 
 const app: FastifyInstance = Fastify({ logger: true });
 
@@ -32,6 +34,9 @@ app.register(productRoutes, {
 });
 app.register(compositionRoutes, {
   compositionRepository: new CompositionRepository(prisma),
+});
+app.register(packagingRoutes, {
+  packagingRepository: new PackagingRepository(prisma),
 });
 
 const start = async () => {
