@@ -69,7 +69,7 @@ export function SKUTableComponent({ skus }: SKUTableProps) {
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 <div className="font-medium">{sku.composition.formula}</div>
                 <div className="text-gray-500 text-xs">
-                  {sku.composition.unikeyIngredients}
+                  {sku.composition.keyIngredients}
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
