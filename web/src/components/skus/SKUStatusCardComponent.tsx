@@ -1,5 +1,4 @@
 import { SKUEntity, SKUStatusEnum } from "@/types/sku";
-import Link from "next/link";
 
 interface SKUTableProps {
   skus: SKUEntity[];
@@ -7,7 +6,7 @@ interface SKUTableProps {
 
 export function SKUStatusCardComponent({ skus }: SKUTableProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-8">
       <div className="bg-white p-6 rounded-lg shadow-sm border">
         <div className="text-2xl font-bold text-gray-900">{skus?.length}</div>
         <div className="text-gray-600">Total de SKUs</div>
@@ -46,6 +45,16 @@ export function SKUStatusCardComponent({ skus }: SKUTableProps) {
           {
             skus?.filter(
               (sku: SKUEntity) => sku.status === SKUStatusEnum.DESATIVADO
+            ).length
+          }
+        </div>
+        <div className="text-gray-600">Desativados</div>
+      </div>
+      <div className="bg-white p-6 rounded-lg shadow-sm border">
+        <div className="text-2xl font-bold text-red-600">
+          {
+            skus?.filter(
+              (sku: SKUEntity) => sku.status === SKUStatusEnum.CANCELADO
             ).length
           }
         </div>
