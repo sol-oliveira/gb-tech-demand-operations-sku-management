@@ -17,8 +17,8 @@ import { DataNotFoundUpdateComponent } from "@/components/skus/edit/DataNotFound
 import { SKUWarningUpdateComponent } from "@/components/skus/edit/SKUWarningUpdateComponent";
 import { useGetSKUById } from "@/queries/skus/sku-get-by-id";
 import { LoadingSpinnerComponent } from "@/components/shared/LoadingSpinnerComponent";
-import { SKURequest, SKUUpdateRequest } from "@/types/skuRequest";
-import { createSKU } from "@/api/sku/apiSKU";
+import { SKURequest } from "@/types/skuRequest";
+import { useCreateSKU } from "@/hooks/sku/useCreateSKU";
 
 export default function EditSKUPage() {
   const params = useParams();
@@ -26,8 +26,7 @@ export default function EditSKUPage() {
   const [formData, setFormData] = useState<Partial<SKUEntity>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [originalSKU, setOriginalSKU] = useState<SKUEntity | null>(null);
+  const { mutateAsync: updateSKUMutate } = useCreateSKU();
 
   const { data: sku, isLoading: loadingSKU } = useGetSKUById(String(params.id));
   const { data: products, isLoading: loadingProducts } = useListProducts();
@@ -40,10 +39,7 @@ export default function EditSKUPage() {
 
   const loadOriginalSKU = useCallback(async () => {
     if (!sku) return;
-
     try {
-      setOriginalSKU(sku);
-
       const clonedData: Partial<SKUEntity> = {
         ...sku,
         skuCode: generateNewSKUCode(sku.skuCode),
@@ -54,8 +50,6 @@ export default function EditSKUPage() {
       setFormData(clonedData);
     } catch (error) {
       console.error("Erro ao carregar SKU original:", error);
-    } finally {
-      setLoading(false);
     }
   }, [sku]);
 
@@ -86,7 +80,7 @@ export default function EditSKUPage() {
         userCreate: "U017599",
       } as SKURequest;
 
-      await createSKU(payload);
+      await updateSKUMutate(payload);
       router.push(`/skus`);
     } catch (error) {
       console.error("Erro ao salvar SKU:", error);

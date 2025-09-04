@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { SKUEntity } from "@/types/sku";
+import { SKUEntity, SKUStatusEnum } from "@/types/sku";
 import { SKUFormComponent } from "@/components/skus/SKUFormComponent";
 import { ProductsListComponent } from "@/components/products/ProsuctsListComponent";
 import { CompositionsListComponent } from "@/components/compositions/CompositionsListComponent";
@@ -17,8 +17,8 @@ import { DataNotFoundUpdateComponent } from "@/components/skus/edit/DataNotFound
 import { SKUWarningUpdateComponent } from "@/components/skus/edit/SKUWarningUpdateComponent";
 import { useGetSKUById } from "@/queries/skus/sku-get-by-id";
 import { LoadingSpinnerComponent } from "@/components/shared/LoadingSpinnerComponent";
+import { useUpdateSKU } from "@/hooks/sku/useUpdateSKU";
 import { SKUUpdateRequest } from "@/types/skuRequest";
-import { updateSKU } from "@/api/sku/apiSKU";
 
 export default function EditSKUPage() {
   const params = useParams();
@@ -26,6 +26,7 @@ export default function EditSKUPage() {
   const [formData, setFormData] = useState<Partial<SKUEntity>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [saving, setSaving] = useState(false);
+  const { mutateAsync: updateSKUMutate } = useUpdateSKU();
 
   const { data: sku, isLoading: loadingSKU } = useGetSKUById(String(params.id));
   const { data: products, isLoading: loadingProducts } = useListProducts();
@@ -41,6 +42,8 @@ export default function EditSKUPage() {
       setSaving(true);
       setIsSubmitted(true);
 
+      if (sku?.status === SKUStatusEnum.CANCELADO) return;
+
       const payload = {
         id: formData.id,
         skuCode: formData.skuCode,
@@ -54,7 +57,7 @@ export default function EditSKUPage() {
         userUpdate: "U017599",
       } as SKUUpdateRequest;
 
-      await updateSKU(payload);
+      await updateSKUMutate(payload);
       router.push(`/skus`);
     } catch (error) {
       console.error("Erro ao salvar SKU:", error);

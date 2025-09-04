@@ -55,7 +55,7 @@ export function SKUHeaderUpdateComponent({
             </button>
             <button
               onClick={handleUpdate}
-              disabled={saving || sku.status === SKUStatusEnum.CANCELADO}
+              disabled={saving}
               className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50"
             >
               {saving ? "Salvando..." : "Salvar"}

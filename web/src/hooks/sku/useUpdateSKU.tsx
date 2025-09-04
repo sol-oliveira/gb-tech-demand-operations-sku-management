@@ -8,7 +8,7 @@ export const useUpdateSKU = () => {
   return useMutation({
     mutationFn: (data: SKUUpdateRequest) => updateSKU(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["skus-update"] });
+      queryClient.invalidateQueries({ queryKey: ["skus"] });
     },
   });
 };

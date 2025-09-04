@@ -58,7 +58,7 @@ export function SKUStatusCardComponent({ skus }: SKUTableProps) {
             ).length
           }
         </div>
-        <div className="text-gray-600">Desativados</div>
+        <div className="text-gray-600">Cancelados</div>
       </div>
     </div>
   );
