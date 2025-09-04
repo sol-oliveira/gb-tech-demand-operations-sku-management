@@ -1,4 +1,3 @@
-<img width="800" alt="image" height="400" src="SKUs.gif"/>
 
 ## 📋 Sobre 
 <p>
@@ -16,6 +15,13 @@ O principal objetivo é fornecer uma plataforma para:
 
 O ciclo de vida de um SKU é regido por um fluxo de estados com transições específicas e campos editáveis.            
 A lógica de transição de status é encapsulada em um serviço SKUStateMachine, garantindo que apenas transições válidas sejam permitidas.
+
+## 🎬 Demonstração
+
+<p align="center">
+  <img src="SKUs.gif" alt="Demonstração do projeto" width="800" height="400"/>
+</p>
+
 
 ## 📈 Melhorias
 
@@ -86,7 +92,9 @@ $ npm run dev
 ```
 
 
+## 📄 Currículo
 
+🔗 https://sol-oliveira.github.io/curriculo
 
 
 
