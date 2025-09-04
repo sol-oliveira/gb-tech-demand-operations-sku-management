@@ -1,15 +1,31 @@
-<img width="800" alt="image" height="400" src="NLW Spacetime.gif"/>
+<img width="800" alt="image" height="400" src="SKUs.gif"/>
 
 ## 📋 Sobre 
 <p>
- Sistema de gerenciamento de SKUs para o Grupo Boticário.
+ Este projeto consiste em um sistema para gerenciar o cadastro e o fluxo de estados de Stock Keeping Units (SKUs), 
+ que representam cada combinação específica de variações de produtos.
 </p>
 
-### 🛠 Tecnologias Front
+## 🎯 Objetivo
+
+O principal objetivo é fornecer uma plataforma para:
+-  Permitir o cadastro e a alteração de SKUs.
+- Controlar a alteração do fluxo (status) de um SKU, seguindo um conjunto de regras de negócio predefinidas.
+
+## 🔄 Fluxo de Estados dos SKUs
+
+O ciclo de vida de um SKU é regido por um fluxo de estados com transições específicas e campos editáveis.            
+A lógica de transição de status é encapsulada em um serviço SKUStateMachine, garantindo que apenas transições válidas sejam permitidas.
+
+## 📈 Melhorias
+
+- Criação de uma tela específica para clonar um SKU e gerar uma nova versão. 
+
+
+
+## 🛠 Tecnologias Front
 
 - [Next.js](https://nextjs.org/) - Framework React
-
-- [NextAuth.js](https://next-auth.js.org/) - Provedor de autenticação
 
 - [TypeScript](https://www.typescriptlang.org/) - Extensão do JavaScript (suporte a módulos, interface, classe e tipagem)
 
