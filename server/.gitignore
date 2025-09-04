@@ -4,3 +4,19 @@ node_modules
 coverage 
 dist
 /src/generated/prisma
+
+# Banco de dados Prisma (SQLite local)
+prisma/dev.db
+prisma/dev.db-journal
+
+# Arquivos de cobertura de testes
+coverage/
+*.lcov
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Outros
+*.tgz
