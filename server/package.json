@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "tsx watch src/presentation/server.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "migrate:dev": "prisma migrate dev",
+    "seed": "node prisma/seeds/seed.js",
+    "db:up": "docker-compose up -d",
+    "test": "NODE_ENV=test ts-node -r tsconfig-paths/register -r ./test/setup-env.ts ./node_modules/.bin/jest --runInBand"
   },
   "type": "module",
   "keywords": [],
@@ -14,9 +18,12 @@
   "license": "ISC",
   "devDependencies": {
     "@prisma/client": "^6.15.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
+    "@types/supertest": "^6.0.3",
     "dotenv": "^17.2.1",
     "eslint-config-next": "^15.5.2",
+    "supertest": "^7.1.4",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
@@ -24,7 +31,9 @@
   "dependencies": {
     "@fastify/cors": "^11.1.0",
     "fastify": "^5.5.0",
+    "jest": "^30.1.2",
     "prisma": "^6.15.0",
+    "ts-jest": "^29.4.1",
     "zod": "^4.1.5"
   },
   "prisma": {

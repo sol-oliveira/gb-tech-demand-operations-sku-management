@@ -13,7 +13,7 @@ import { PackagingRepository } from "../infrastructure/repository/packaging/pack
 import { VolumetryRepository } from "../infrastructure/repository/volumetry/volumetry";
 import { volumetryRoutes } from "./routes/volumetry.routes";
 
-const app: FastifyInstance = Fastify({ logger: true });
+export const app: FastifyInstance = Fastify({ logger: true });
 
 app.register(cors, {
   origin: true,
